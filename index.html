@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Web Solution Proposal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray */
+            color: #334155; /* Dark slate */
+        }
+        .section-heading {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 4px;
+            background-color: #3b82f6; /* Blue */
+            border-radius: 9999px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* More rounded */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            border: 4px solid transparent; /* Initial transparent border */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .card.highlighted { /* For hover effect */
+            border-color: #60a5fa; /* Lighter blue for hover */
+        }
+        .card.selected-package { /* For click effect */
+            border-color: #3b82f6; /* Tailwind blue-500 for selected */
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2), 0 10px 10px -5px rgba(59, 130, 246, 0.1);
+        }
+        .gradient-button {
+            background: linear-gradient(to right, #3b82f6, #2563eb); /* Blue gradient */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+        }
+        .gradient-button:hover {
+            background: linear-gradient(to right, #2563eb, #1d4ed8);
+            box-shadow: 0 6px 8px rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: #bfdbfe; /* Light blue */
+            color: #1e40af; /* Darker blue */
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .package-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            cursor: pointer; /* Indicate clickable */
+        }
+        .package-header {
+            padding: 1.5rem;
+            border-top-left-radius: 1.1rem; /* Adjusted for border */
+            border-top-right-radius: 1.1rem; /* Adjusted for border */
+            color: white;
+            text-align: center;
+        }
+        .package-header.basic {
+            background-color: #60a5fa; /* Blue-400 */
+        }
+        .package-header.growth {
+            background-color: #3b82f6; /* Blue-500 */
+        }
+        .package-header.elite {
+            background-color: #1d4ed8; /* Blue-700 */
+        }
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+        .package-features {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+        .package-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .package-features li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: #475569; /* Slate-700 */
+        }
+        .package-features li svg {
+            flex-shrink: 0;
+            margin-right: 0.5rem;
+            color: #10b981; /* Green-500 */
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        .package-footer {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        /* Ensuring portfolio items are responsive */
+        .portfolio-grid {
+            display: grid;
+            gap: 2rem; /* Corresponds to gap-8 */
+            grid-template-columns: 1fr; /* Mobile: 1 column */
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
+            }
+        }
+
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .portfolio-grid {
+                grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
+            }
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed">
+
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20 px-4 md:px-8 rounded-b-3xl shadow-xl">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
+                Your Digital Transformation Starts Here
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 opacity-90">
+                A Comprehensive Web Solution Proposal
+            </p>
+            <a href="#introduction" class="gradient-button inline-block">
+                Explore Our Proposal
+            </a>
+        </div>
+    </header>
+
+    <section id="introduction" class="py-16 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-heading">
+                About Us: Your Trusted Digital Partner
+            </h2>
+            <div class="bg-white p-8 rounded-3xl shadow-lg">
+                <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                    We are a team of dedicated freelancers with over <strong class="text-blue-600">four years of extensive experience</strong> in <strong class="text-blue-600">web development, software development, digital marketing, and web security</strong>. We've successfully delivered numerous projects across various industries, often in close collaboration with our trusted sister companies and vendor network.
+                </p>
+                <p class="text-lg leading-relaxed text-gray-700">
+                    This collaborative approach allows us to leverage a broader range of expertise and resources, ensuring that we consistently deliver high-quality, innovative solutions that exceed client expectations. We pride ourselves on creating impactful online presences, driving business growth, and securing digital assets for our clients, helping them thrive in the digital landscape.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-16 px-4 md:px-8 bg-blue-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-heading">
+                Our Past Work Portfolio
+            </h2>
+            <p class="text-lg text-gray-700 mb-8">
+                We're proud to showcase some of our recent projects. Please note that all the work listed below was completed in collaboration with our vendor and sister companies, demonstrating our ability to manage complex projects and deliver exceptional results through strategic partnerships.
+            </p>
+            <div class="portfolio-grid">
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <svg class="w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <h3 class="text-xl font-semibold mb-2">Foundation Cigar Company</h3>
+                    <p class="text-gray-600 mb-4">Elegant e-commerce platform for a premium cigar brand.</p>
+                    <a href="https://foundationcigarcompany.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-medium">View Project</a>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <svg class="w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <h3 class="text-xl font-semibold mb-2">Pure Creations</h3>
+                    <p class="text-gray-600 mb-4">Visually rich portfolio for an event management company.</p>
+                    <a href="https://purecreations.in/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-medium">View Project</a>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <svg class="w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <h3 class="text-xl font-semibold mb-2">Girl About</h3>
+                    <p class="text-gray-600 mb-4">Engaging online magazine platform for lifestyle content.</p>
+                    <a href="https://girlabout.co.uk/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-medium">View Project</a>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <svg class="w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <h3 class="text-xl font-semibold mb-2">Advaith Hospital</h3>
+                    <p class="text-gray-600 mb-4">Professional website for a multi-specialty healthcare provider.</p>
+                    <a href="https://advaithospital.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-medium">View Project</a>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <svg class="w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <h3 class="text-xl font-semibold mb-2">Growth Gurus</h3>
+                    <p class="text-gray-600 mb-4">Dynamic site for a digital marketing agency, showcasing services.</p>
+                    <a href="https://growthgurus.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-medium">View Project</a>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <svg class="w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <h3 class="text-xl font-semibold mb-2">Satyam Footwear</h3>
+                    <p class="text-gray-600 mb-4">User-friendly e-commerce site for a footwear brand.</p>
+                    <a href="https://satyamfootwear.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-medium">View Project</a>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <svg class="w-12 h-12 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <h3 class="text-xl font-semibold mb-2">Premium IPTV HD</h3>
+                    <p class="text-gray-600 mb-4">Streamlined website for an IPTV service provider.</p>
+                    <a href="https://premiumiptvhd.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-medium">View Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="core-requirements" class="py-16 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-heading">
+                Your Core Website Requirements
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">📝</span>
+                    <p class="text-gray-700">Services List & Description Pages</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">💰</span>
+                    <p class="text-gray-700">Pricing Details</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">📧</span>
+                    <p class="text-gray-700">Contact Inquiry Forms</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">ℹ️</span>
+                    <p class="text-gray-700">About Website (Profile, History)</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🖼️</span>
+                    <p class="text-gray-700">Image and Video Gallery</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">✨</span>
+                    <p class="text-gray-700">Parallax Scrolling & Web Page Design</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">📱</span>
+                    <p class="text-gray-700">Responsive Website Layout (All Devices)</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🎨</span>
+                    <p class="text-gray-700">Graphics Design (Photo Edition, Banners)</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🎬</span>
+                    <p class="text-gray-700">Banner Animation (Image Slider)</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">📩</span>
+                    <p class="text-gray-700">Inquiry Form To Email Address</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🌐</span>
+                    <p class="text-gray-700">Latest PC Browser Capability (Bootstrap 4, CSS3)</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">📍</span>
+                    <p class="text-gray-700">Google Map Integration on Contact Form</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">💬</span>
+                    <p class="text-gray-700">WhatsApp Live Chat</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="promotion-tools" class="py-16 px-4 md:px-8 bg-blue-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-heading">
+                Essential Website Promotion Tools
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🔗</span>
+                    <p class="text-gray-700">Social Media Linking</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">📤</span>
+                    <p class="text-gray-700">Auto Share Pages with Open Graph Data</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">👤</span>
+                    <p class="text-gray-700">Google Profile Integration</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">▶️</span>
+                    <p class="text-gray-700">YouTube Channel Linking</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">📈</span>
+                    <p class="text-gray-700">Google Auto Suggestion Ranking</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">2️⃣</span>
+                    <p class="text-gray-700">Web2.0 Enablement</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">📄</span>
+                    <p class="text-gray-700">All Page Separate Meta Descriptions</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🏷️</span>
+                    <p class="text-gray-700">Products Images Auto ALT</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🎯</span>
+                    <p class="text-gray-700">Keyword Specific Targeting with Social Signals</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">📊</span>
+                    <p class="text-gray-700">Google Analytics Integration</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🛠️</span>
+                    <p class="text-gray-700">Google Webmaster Tools Integration</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🔍</span>
+                    <p class="text-gray-700">Yahoo Search Submission Sitemap XML</p>
+                </div>
+                <div class="card p-6 flex items-start">
+                    <span class="feature-icon">🔎</span>
+                    <p class="text-gray-700">Bing Search Submission with Sitemap XML</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="our-approach" class="py-16 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-heading">
+                Our Approach: Building Your Digital Success
+            </h2>
+            <div class="bg-white p-8 rounded-3xl shadow-lg">
+                <p class="text-lg leading-relaxed text-gray-700 mb-8">
+                    Our approach is collaborative and client-focused, ensuring transparency and efficiency at every stage of your project. We believe in understanding your vision deeply to translate it into a powerful online reality.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="flex items-start">
+                        <span class="feature-icon bg-green-200 text-green-800">1</span>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Discovery & Planning</h3>
+                            <p class="text-gray-600">Thoroughly understanding your business, audience, and goals to map out structure and functionalities.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="feature-icon bg-green-200 text-green-800">2</span>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Design & Development</h3>
+                            <p class="text-gray-600">Creating engaging mockups and bringing your vision to life with responsive design.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="feature-icon bg-green-200 text-green-800">3</span>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Content Integration & Optimization</h3>
+                            <p class="text-gray-600">Integrating your content, optimized for search engines and user engagement.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="feature-icon bg-green-200 text-green-800">4</span>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Testing & Quality Assurance</h3>
+                            <p class="text-gray-600">Rigorous testing across browsers and devices for a bug-free, functional website.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="feature-icon bg-green-200 text-green-800">5</span>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Launch & Promotion</h3>
+                            <p class="text-gray-600">Launching your website and initiating promotion tools for online visibility.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="feature-icon bg-green-200 text-green-800">6</span>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Post-Launch Support</h3>
+                            <p class="text-gray-600">Initial support and guidance to help you manage your new digital asset.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="suggestions" class="py-16 px-4 md:px-8 bg-blue-50">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-heading mx-auto">
+                Maximizing Your Online Presence: Beyond the Essentials
+            </h2>
+            <div class="bg-white p-8 rounded-3xl shadow-lg">
+                <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                    The features you've outlined will undoubtedly lay a solid foundation for your online presence, effectively communicating your services and providing crucial contact points. This is an excellent starting point for any business looking to establish itself digitally.
+                </p>
+                <p class="text-lg leading-relaxed text-gray-700 mb-8">
+                    However, in today's competitive online landscape, simply having a functional website isn't enough to truly stand out and consistently attract new clients. <strong class="text-blue-600">To ensure your investment delivers maximum returns and truly fuels your business growth, we strongly recommend considering strategies that go beyond the basic requirements.</strong> These are not just add-ons; they are vital components for converting visitors into loyal customers, expanding your reach, and building a dominant online authority.
+                </p>
+                <p class="text-lg leading-relaxed text-gray-700 font-semibold text-red-600">
+                    Without these crucial enhancements, your website might struggle to achieve its full potential in terms of organic reach, lead conversion, and market penetration. We've structured our packages to highlight how these additional layers of optimization can provide a significant competitive advantage and long-term benefits. We can guide you through these crucial steps, tailoring our suggestions to your specific needs and target audience.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="packages" class="py-16 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-heading">
+                Our Comprehensive Packages
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <div class="card package-card">
+                    <div class="package-header basic">
+                        <h3 class="text-2xl font-bold">Standard Business Launch</h3>
+                        <p class="package-price">₹25,000</p>
+                        <p class="text-sm opacity-90">Essential Online Presence</p>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Includes ALL Core Website Requirements
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Includes ALL Website Promotion Tools Features
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Up to <strong>10 standard pages</strong>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                <strong>1 round</strong> of design/content revisions
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="package-footer">
+                        <button class="gradient-button">Get Started</button>
+                    </div>
+                </div>
+
+                <div class="card package-card"> <div class="package-header growth">
+                        <h3 class="text-2xl font-bold">Professional Growth Package</h3>
+                        <p class="package-price">₹30,000</p>
+                        <p class="text-sm opacity-90">Enhanced Engagement & Visibility</p>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                All features from Standard Business Launch
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Up to <strong>15 standard pages</strong>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                <strong>Advanced Live Chat & Call Integration (3rd Party)</strong>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                <strong>Dedicated Owner App for Query Management</strong>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Enhanced Content Strategy Consultation
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Advanced Image & Video Optimization
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Schema Markup Implementation
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Dedicated Blog/News Section Setup
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                <strong>2 rounds</strong>&nbsp;of design/content revisions
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="package-footer">
+                        <button class="gradient-button">Choose This Package</button>
+                    </div>
+                </div>
+
+                <div class="card package-card">
+                    <div class="package-header elite">
+                        <h3 class="text-2xl font-bold">Elite Performance & Lead Generation</h3>
+                        <p class="package-price">₹40,000</p>
+                        <p class="text-sm opacity-90">Maximized Impact & Growth</p>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                All features from Professional Growth Package
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Up to <strong>20 standard pages</strong>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                <strong>Enhanced Dedicated Owner App with Team Assignment</strong>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Conversion Rate Optimization (CRO) Consulting
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Advanced Google Analytics Dashboard & Reporting
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Email Marketing Integration (Advanced Setup)
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                Preliminary Competitor Analysis (SEO & UX)
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                XML Sitemap & Robot.txt Optimization
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                <strong>Two months of SEO report creation & provision</strong>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                <strong>Ongoing SEO Consulting</strong>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                <strong>3 rounds</strong>&nbsp;of design/content revisions
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                <strong>1</strong> &nbsp;month of post-launch minor content updates
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="package-footer">
+                        <button class="gradient-button">Maximize My Growth</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="terms" class="py-16 px-4 md:px-8 bg-blue-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-heading">
+                Terms and Conditions
+            </h2>
+            <div class="bg-white p-8 rounded-3xl shadow-lg text-gray-700 leading-relaxed">
+                <ul class="list-disc pl-5 space-y-3">
+                    <li><strong>Hosting and Domain:</strong> The cost of website hosting and domain registration are not included in the package prices and will be the client's responsibility. We can provide guidance on reliable hosting providers.</li>
+                    <li><strong>Validity:</strong> This proposal and the stated package prices are valid for <strong>10 days</strong> from the date of issuance.</li>
+                    <li><strong>Project Availability:</strong> Project commencement will be finalized based on the team's current bandwidth and availability. We will confirm the start date upon agreement.</li>
+                    <li><strong>Delivery Timeline:</strong> A minimum of <strong>20-25 business days</strong> will be required for the delivery of the website, starting from the receipt of all necessary content and materials from the client. Larger projects or extensive revisions may require additional time.</li>
+                    <li><strong>Content Responsibility:</strong> The client is responsible for providing all website content (text, images, videos, logos, etc.) in a timely manner. Delays in content submission may impact the project timeline.</li>
+                    <li><strong>SEO Disclaimer:</strong> While we will implement best practices for SEO and utilize advanced tools to improve your website's search engine ranking, we cannot guarantee specific ranking positions on Google or other search engines. Search engine algorithms are complex and constantly evolving, and ranking depends on various factors beyond our direct control. We adhere strictly to ethical SEO practices, ensuring all strategies are transparent and compliant with industry guidelines. SEO reporting and consulting provided in the Elite package will focus on tracking progress, identifying opportunities, and strategic guidance; specific ranking outcomes are not guaranteed.</li>
+                    <li><strong>Third-Party Live Chat/Call Service:</strong> The implementation of 3rd-party live chat and call systems in the Professional Growth and Elite Performance packages involves integrating a chosen service. Any subscription fees or usage charges for these 3rd-party services (e.g., for the chat platform, call minutes, or advanced features of the dedicated app) are separate from our package price and will be the client's responsibility. We will assist in the initial setup and integration.</li>
+                    <li><strong>Payment Schedule:</strong>
+                        <ul class="list-circle pl-8 mt-2 space-y-1">
+                            <li><strong>50% Advance Payment:</strong> Due upon signing of the project agreement to initiate work.</li>
+                            <li><strong>25% Mid-Project Payment:</strong> Due upon completion of 50% of the website development (e.g., if 20 pages are to be developed, this payment is due after the completion of 10 pages). This milestone will be clearly defined in the project plan and mutually agreed upon.</li>
+                            <li><strong>25% Final Payment:</strong> Due upon final delivery and client acceptance of the completed website, prior to the transfer of code and authority.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Code and Authority Transfer:</strong> Full ownership of the website code, intellectual property, and administrative access will be transferred to the client only upon receipt of the final payment. A Non-Disclosure Agreement (NDA) will be signed to protect sensitive information during the project.</li>
+                    <li><strong>Revisions:</strong> Each package includes a specified number of revision rounds. Additional revisions beyond the agreed-upon scope may incur extra charges, billed at an hourly rate of [Your Hourly Rate, e.g., ₹X/hour].</li>
+                    <li><strong>Maintenance and Support:</strong> The packages do not include ongoing website maintenance, updates, or technical support after delivery. Post-delivery support and maintenance plans can be arranged through a separate agreement to ensure your website remains secure, updated, and performing optimally.</li>
+                    <li><strong>Third-Party Services (General):</strong> Any costs associated with other third-party services (e.g., premium plugins not explicitly mentioned, specific stock photography licenses beyond what's included in graphics design, CRM software subscriptions) are not included in the package price and will be an additional expense, agreed upon in advance with the client.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-12 px-4 md:px-8 mt-16 rounded-t-3xl">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-lg mb-4">
+                We are confident that our expertise and this comprehensive proposal will provide you with a powerful and effective online solution, setting you up for sustained success.
+            </p>
+            <p class="text-xl font-semibold mb-6">
+                Ready to transform your online presence? Let's connect!
+            </p>
+            <a href="mailto:your_email@example.com" class="gradient-button inline-block text-lg">
+                Contact Us Today
+            </a>
+            <p class="text-sm mt-8 opacity-75">&copy; 2025. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script for interactive package selection
+        document.addEventListener('DOMContentLoaded', () => {
+            const packageCards = document.querySelectorAll('.package-card');
+            let selectedPackage = null;
+
+            packageCards.forEach(card => {
+                // Hover effect
+                card.addEventListener('mouseenter', () => {
+                    if (card !== selectedPackage) {
+                        card.classList.add('highlighted');
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (card !== selectedPackage) {
+                        card.classList.remove('highlighted');
+                    }
+                });
+
+                // Click effect
+                card.addEventListener('click', () => {
+                    // Remove selection and hover highlight from previously selected package
+                    if (selectedPackage && selectedPackage !== card) {
+                        selectedPackage.classList.remove('selected-package');
+                        selectedPackage.classList.remove('highlighted'); // Ensure hover highlight is also removed
+                    }
+
+                    // Toggle selection for the current card
+                    if (selectedPackage === card) {
+                        // If clicking the already selected card, deselect it (optional behavior)
+                        // card.classList.remove('selected-package');
+                        // selectedPackage = null;
+                        // For now, let's keep it selected once clicked, unless another is clicked.
+                    } else {
+                        card.classList.add('selected-package');
+                        card.classList.remove('highlighted'); // Remove hover highlight if it was there
+                        selectedPackage = card;
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
